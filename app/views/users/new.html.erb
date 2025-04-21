@@ -1,11 +1,24 @@
 <% content_for :title, "New user" %>
 
-<h1>New user</h1>
+<%= form_with model: @user, local: true do |form| %>
+<p>
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+</p>
 
-<%= render "form", user: @user %>
+<p>
+  <%= form.label :email %>
+  <%= form.email_field :email %>
+</p>
 
-<br>
+<p>
+  <%= form.label :avatar, "プロフィール画像" %>
+  <%= form.file_field :avatar %>
+</p>
 
-<div>
-  <%= link_to "Back to users", users_path %>
-</div>
+<p>
+  <%= form.submit %>
+</p>
+<% end %>
+
+<%= link_to "Back to users", users_path %>

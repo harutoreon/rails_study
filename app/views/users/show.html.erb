@@ -1,6 +1,20 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @user %>
+<p>
+  Name：<%= @user.name %>
+</p>
+
+<p>
+  Eamil：<%= @user.email %>
+</p>
+
+<% if @user.avatar.attached? %>
+  <%= image_tag @user.avatar.variant(resize_to_limit: [300, 300]) %>
+<% elsif %>
+  <p>
+    Image：No Image
+  </p>
+<% end %>
 
 <div>
   <%= link_to "Edit this user", edit_user_path(@user) %> |
