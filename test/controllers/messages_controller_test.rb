@@ -17,10 +17,20 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create message" do
     assert_difference("Message.count") do
-      post messages_url, params: { message: { content: @message.content, title: @message.title } }
+      post messages_url, params: {
+        message: {
+          content: @message.content,
+          title: @message.title,
+          images: [ file_fixture_upload("electroless_nickel_plating.png", "image/png") ]
+        }
+      }
     end
 
     assert_redirected_to message_url(Message.last)
+
+    message = Message.last
+
+    assert message.images.attached?
   end
 
   test "should show message" do
