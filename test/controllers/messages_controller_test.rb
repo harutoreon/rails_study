@@ -5,6 +5,11 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
     @message = messages(:one)
   end
 
+  def after_teardown
+    super
+    FileUtils.rm_rf(ActiveStorage::Blob.service.root)
+  end
+
   test "should get index" do
     get messages_url
     assert_response :success
@@ -26,10 +31,9 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
       }
     end
 
-    assert_redirected_to message_url(Message.last)
-
     message = Message.last
 
+    assert_redirected_to message_url(message)
     assert message.images.attached?
   end
 
