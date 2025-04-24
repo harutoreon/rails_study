@@ -1,0 +1,17 @@
+<div id="<%= dom_id message %>">
+  <p>
+    <strong>Title:</strong>
+    <%= message.title %>
+  </p>
+
+  <p>
+    <strong>Content:</strong>
+    <%= message.content %>
+  </p>
+
+  <% message.images.each do |image| %>
+    <div style="margin-bottom: 10px;">
+      <%= image_tag image.variant(resize_to_limit: [300, 300]) %>
+    </div>
+  <% end %>
+</div>
